@@ -7,9 +7,10 @@ import { map } from 'rxjs/operators';
 })
 export class ApiService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {}
 
   getMonumentJSON(): any {
     return this._http.get('./../../assets/monumentos-turisticos.json').pipe(map(data => data['features']));
   }
+
 }
