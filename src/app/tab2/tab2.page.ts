@@ -1,6 +1,5 @@
 import { ApiService } from './../services/api.service';
 import { Component, ViewChild } from '@angular/core';
-import * as utm from 'node_modules/utm/index.js';
 
 declare var google;
 
@@ -14,15 +13,14 @@ export class Tab2Page {
   @ViewChild("map") mapElement;
   map: any;
 
-  public placesLatLong = [];
-
   constructor(private _apiService: ApiService){
-    this._apiService.getMonumentJSON().subscribe( data => {
-      data.forEach(element => {
-        this.placesLatLong.push(element.properties.nombre, this.getCoordinatesLatLong(element.geometry.coordinates[0],element.geometry.coordinates[1]));
-      });
-      console.log(this.placesLatLong);
+    this._apiService.getMonumentJSON().subscribe( () => {
+      this._apiService.placesLatLong.forEach(data => {
+        console.log(data);
+        this.setMarkers(data.latitude, data.longitude);
+      })
     });
+
   }
 
   ngOnInit(): void {
@@ -44,11 +42,11 @@ export class Tab2Page {
     });
   }
 
-  setMarkers() {
-    // https://developers.google.com/maps/documentation/javascript/markers
-  }
-
-  getCoordinatesLatLong(valuex: string, valuey: string) {
-    return utm.toLatLon(valuex, valuey, 30, 's');
+  setMarkers(lat: number, long: number) {
+    let coords = new google.maps.LatLng(lat, long);
+    let marker: google.maps.Marker = new google.maps.Marker({
+      map: this.map,
+      position: coords,
+    });
   }
 }
