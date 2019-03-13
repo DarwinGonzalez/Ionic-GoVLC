@@ -2,11 +2,13 @@ export class Markerinfo {
     nombre: string;
     latitude: number;
     longitude: number;
+    telefono: string;
 
-    constructor(nombre: string, latitude: number, longitude: number) {
+    constructor(nombre: string, latitude: number, longitude: number, telefono?: string) {
         this.nombre = nombre;
         this.latitude = latitude;
-        this.longitude = longitude
+        this.longitude = longitude;
+        this.telefono = telefono;
     }
 
     getNombre() {
@@ -14,10 +16,14 @@ export class Markerinfo {
     }
 
     getLatitude() {
-        return this.latitude
+        return this.latitude;
     }
 
     getLongitude() {
         return this.longitude;
+    }
+
+    getTelefono() {
+        return this.telefono;
     }
 }

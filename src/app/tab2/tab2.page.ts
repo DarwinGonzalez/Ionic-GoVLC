@@ -10,15 +10,19 @@ declare var google;
 })
 export class Tab2Page {
 
-  @ViewChild("map") mapElement;
+  @ViewChild('map') mapElement;
   map: any;
 
   constructor(private _apiService: ApiService){
     this._apiService.getMonumentJSON().subscribe( () => {
       this._apiService.placesLatLong.forEach(data => {
         console.log(data);
-        this.setMarkers(data.nombre, data.latitude, data.longitude);
-      })
+        if (data.telefono === '0') {
+          this.setMarkers(data.nombre, data.latitude, data.longitude, 'No hay un teléfono disponible');
+        } else {
+          this.setMarkers(data.nombre, data.latitude, data.longitude, data.telefono);
+        }
+      });
     });
 
   }
@@ -28,22 +32,28 @@ export class Tab2Page {
   }
 
   initMap() {
-    let coords = new google.maps.LatLng(39.4767088559305, -0.37814708266530195);
-    let mapOptions: google.maps.MapOptions = {
+    const coords = new google.maps.LatLng(39.4767088559305, -0.37814708266530195);
+    const mapOptions: google.maps.MapOptions = {
       center: coords,
       zoom: 12,
       mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
+    };
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    let marker: google.maps.Marker = new google.maps.Marker({
+    const marker: google.maps.Marker = new google.maps.Marker({
       map: this.map,
       position: coords,
     });
   }
 
-  setMarkers(nombre: string, lat: number, long: number) {
-    const contentString = `<div id="content"><h1 id="firstHeading" class="firstHeading">${nombre}</h1></div>`;
+  setMarkers(nombre: string, lat: number, long: number, telefono?: string) {
+    const contentString = `
+    <div id="content">
+      <h1 id="firstHeading" class="firstHeading">${nombre}</h1>
+      <div id="bodyContent">
+        <p><b>Teléfono:</b> ${telefono}</p>
+      </div>
+    </div>`;
     const coords = new google.maps.LatLng(lat, long);
     const marker: google.maps.Marker = new google.maps.Marker({
       map: this.map,

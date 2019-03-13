@@ -26,8 +26,8 @@ export class ApiService {
     this.placesLatLong = [];
     this.getMonumentJSON().subscribe( data => {
       data.forEach(element => {
-        const coords = this.getCoordinatesLatLong(element.geometry.coordinates[0],element.geometry.coordinates[1]);
-        let marker = new Markerinfo(element.properties.nombre, coords.latitude, coords.longitude);
+        const coords = this.getCoordinatesLatLong(element.geometry.coordinates[0], element.geometry.coordinates[1]);
+        let marker = new Markerinfo(element.properties.nombre, coords.latitude, coords.longitude, element.properties.telefono);
         this.placesLatLong.push(marker);
       });
     });
