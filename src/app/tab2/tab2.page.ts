@@ -17,7 +17,7 @@ export class Tab2Page {
     this._apiService.getMonumentJSON().subscribe( () => {
       this._apiService.placesLatLong.forEach(data => {
         console.log(data);
-        this.setMarkers(data.latitude, data.longitude);
+        this.setMarkers(data.nombre, data.latitude, data.longitude);
       })
     });
 
@@ -42,11 +42,21 @@ export class Tab2Page {
     });
   }
 
-  setMarkers(lat: number, long: number) {
-    let coords = new google.maps.LatLng(lat, long);
-    let marker: google.maps.Marker = new google.maps.Marker({
+  setMarkers(nombre: string, lat: number, long: number) {
+    const contentString = `<div id="content"><h1 id="firstHeading" class="firstHeading">${nombre}</h1></div>`;
+    const coords = new google.maps.LatLng(lat, long);
+    const marker: google.maps.Marker = new google.maps.Marker({
       map: this.map,
       position: coords,
+    });
+
+    const infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+
+    marker.addListener('click', function() {
+      infowindow.open(this.map, marker);
     });
   }
 }
