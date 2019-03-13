@@ -1,6 +1,8 @@
 {
   "name": "goVLC",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "dce75d23"
 }
