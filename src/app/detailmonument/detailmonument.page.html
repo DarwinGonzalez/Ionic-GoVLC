@@ -25,10 +25,15 @@
     <ion-item *ngIf="monument.telefono != '0'">
         <ion-icon name="call" slot="start"></ion-icon>
         <ion-label>{{ monument.telefono }}</ion-label>
-        <ion-button color="success">Llamar</ion-button>
+        <ion-button color="success" (click)="makeCall(monument.telefono)">Llamar</ion-button>
     </ion-item>
   </ion-card>
 
- 
+  <ion-card>
+    <ion-card-content>
+      <ion-label color="danger" *ngIf="!monument.visitado">Usted aún no ha visitado este lugar</ion-label>
+      <ion-label color="success" *ngIf="monument.visitado">Usted ya ha visitado este lugar</ion-label>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
