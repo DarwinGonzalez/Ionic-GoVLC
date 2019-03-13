@@ -21,8 +21,8 @@ export class Tab1Page implements OnInit {
     this.monuments = this._apiService.placesLatLong;
   }
 
-  seeDetails() {
-    this._router.navigateByUrl('/tabs/tab1/details');
+  seeDetails(item: any) {
+    this._router.navigate(['/tabs/tab1/details', JSON.stringify(item)]);
   }
 
 }

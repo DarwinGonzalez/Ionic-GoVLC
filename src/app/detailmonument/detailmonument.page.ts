@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Markerinfo } from '../interfaces/markerinfo';
 
 @Component({
   selector: 'app-detailmonument',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailmonumentPage implements OnInit {
 
-  constructor() { }
+  public monument: Markerinfo;
+  constructor(private route: ActivatedRoute) {
+    this.route.params.subscribe( params => {
+      const object = JSON.parse(params['object']);
+      this.monument = new Markerinfo(object.nombre, object.latitude, object.longitude, object.telefono);
+      console.log(this.monument);
+    });
+   }
 
   ngOnInit() {
+
   }
 
 }

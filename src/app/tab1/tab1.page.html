@@ -8,7 +8,7 @@
 
 <ion-content>
   <ion-list *ngFor="let item of monuments; let i = index">
-    <ion-item (click)="seeDetails()">
+    <ion-item (click)="seeDetails(item)">
       <ion-label>{{ item.nombre }}</ion-label>
     </ion-item>
   </ion-list>

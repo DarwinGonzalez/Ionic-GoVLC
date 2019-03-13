@@ -15,7 +15,7 @@ const routes: Routes = [
             loadChildren: '../tab1/tab1.module#Tab1PageModule'
           },
           {
-            path: 'details',
+            path: 'details/:object',
             loadChildren: '../detailmonument/detailmonument.module#DetailmonumentPageModule'
           }
         ]

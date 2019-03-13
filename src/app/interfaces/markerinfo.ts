@@ -3,12 +3,14 @@ export class Markerinfo {
     latitude: number;
     longitude: number;
     telefono: string;
+    visitado: boolean;
 
-    constructor(nombre: string, latitude: number, longitude: number, telefono?: string) {
+    constructor(nombre: string, latitude: number, longitude: number, telefono?: string, visitado?: string) {
         this.nombre = nombre;
         this.latitude = latitude;
         this.longitude = longitude;
         this.telefono = telefono;
+        this.visitado = false;
     }
 
     getNombre() {
@@ -25,5 +27,13 @@ export class Markerinfo {
 
     getTelefono() {
         return this.telefono;
+    }
+
+    getVisitado() {
+        return this.visitado;
+    }
+
+    setVisitado(value: boolean) {
+        this.visitado = value;
     }
 }
