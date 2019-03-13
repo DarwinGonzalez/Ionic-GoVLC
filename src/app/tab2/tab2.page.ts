@@ -47,26 +47,43 @@ export class Tab2Page {
   }
 
   setMarkers(nombre: string, lat: number, long: number, telefono?: string) {
-    const contentString = `
+    const contentStringTelephone = `
+    <div id="content">
+      <h1 id="firstHeading" class="firstHeading">${nombre}</h1>
+      <div id="bodyContent">
+        <p><b>Teléfono:</b> ${telefono} <ion-button color="success">Llamar</ion-button></p>
+      </div>
+    </div>`;
+
+    const contentStringNoTelephone = `
     <div id="content">
       <h1 id="firstHeading" class="firstHeading">${nombre}</h1>
       <div id="bodyContent">
         <p><b>Teléfono:</b> ${telefono}</p>
       </div>
     </div>`;
+
     const coords = new google.maps.LatLng(lat, long);
     const marker: google.maps.Marker = new google.maps.Marker({
       map: this.map,
       position: coords,
     });
 
-    const infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
+    if (telefono  === 'No hay un teléfono disponible') {
+      const infowindow = new google.maps.InfoWindow({
+        content: contentStringNoTelephone
+      });
+      marker.addListener('click', function() {
+        infowindow.open(this.map, marker);
+      });
+    } else {
+      const infowindow = new google.maps.InfoWindow({
+        content: contentStringTelephone
+      });
+      marker.addListener('click', function() {
+        infowindow.open(this.map, marker);
+      });
+    }
 
-
-    marker.addListener('click', function() {
-      infowindow.open(this.map, marker);
-    });
   }
 }
