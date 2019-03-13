@@ -31,7 +31,6 @@ export class ApiService {
         this.placesLatLong.push(marker);
       });
     });
-    console.log(this.placesLatLong);
   }
 
 }
