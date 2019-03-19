@@ -1,5 +1,6 @@
 import { ApiService } from './../services/api.service';
 import { Component, ViewChild } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 declare var google;
 
@@ -13,7 +14,7 @@ export class Tab2Page {
   @ViewChild('map') mapElement;
   map: any;
 
-  constructor(private _apiService: ApiService){
+  constructor(private _apiService: ApiService, private geolocation: Geolocation){
     this._apiService.getMonumentJSON().subscribe( () => {
       this._apiService.placesLatLong.forEach(data => {
         console.log(data);
@@ -44,6 +45,17 @@ export class Tab2Page {
       map: this.map,
       position: coords,
     });
+
+    this.geolocation.getCurrentPosition().then((resp) => {
+      const coords = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      const userMarker: google.maps.Marker = new google.maps.Marker({
+        map: this.map,
+        position: coords,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+      });
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
   }
 
   setMarkers(nombre: string, lat: number, long: number, telefono?: string) {
