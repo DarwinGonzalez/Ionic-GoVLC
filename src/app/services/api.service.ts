@@ -22,6 +22,10 @@ export class ApiService {
     return utm.toLatLon(valuex, valuey, 30, 's');
   }
 
+  getCSVContent(): any {
+    return this._http.get('./../../assets/vias.csv');
+  }
+
   fill() {
     this.placesLatLong = [];
     this.getMonumentJSON().subscribe( data => {

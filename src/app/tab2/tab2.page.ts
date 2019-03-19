@@ -17,7 +17,6 @@ export class Tab2Page {
   constructor(private _apiService: ApiService, private geolocation: Geolocation){
     this._apiService.getMonumentJSON().subscribe( () => {
       this._apiService.placesLatLong.forEach(data => {
-        console.log(data);
         if (data.telefono === '0') {
           this.setMarkers(data.nombre, data.latitude, data.longitude, 'No hay un teléfono disponible');
         } else {
@@ -48,11 +47,28 @@ export class Tab2Page {
 
     this.geolocation.getCurrentPosition().then((resp) => {
       const coords = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      const contentString = `
+      <div id="content">
+        <h1 id="firstHeading" class="firstHeading">You are here!</h1>
+        <div id="bodyContent">
+          <p>This marker represents where you are in the map</p>
+        </div>
+      </div>`;
+
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
       const userMarker: google.maps.Marker = new google.maps.Marker({
         map: this.map,
         position: coords,
         icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
       });
+
+      userMarker.addListener('click', function() {
+        infowindow.open(this.map, userMarker);
+      });
+
      }).catch((error) => {
        console.log('Error getting location', error);
      });
