@@ -5,7 +5,6 @@ import { Markerinfo } from '../interfaces/markerinfo';
 import * as utm from 'node_modules/utm/index.js';
 import { Observable } from 'rxjs';
 import { Vias } from '../interfaces/vias';
-import { element } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +43,6 @@ export class ApiService {
           element.properties.codvia,
           element.properties.telefono);
         this.placesLatLong.push(marker);
-        console.log(marker);
       });
     });
   }

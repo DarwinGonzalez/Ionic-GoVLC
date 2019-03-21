@@ -14,7 +14,7 @@ export class DetailmonumentPage implements OnInit {
   constructor(private route: ActivatedRoute, private callNumber: CallNumber) {
     this.route.params.subscribe( params => {
       const object = JSON.parse(params['object']);
-      this.monument = new Markerinfo(object.nombre, object.latitude, object.longitude, object.telefono);
+      this.monument = object;
     });
    }
 
