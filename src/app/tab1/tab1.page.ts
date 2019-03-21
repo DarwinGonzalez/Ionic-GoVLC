@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class Tab1Page implements OnInit {
 
   public monuments = [];
+  public vias = [];
   constructor(
     private _apiService: ApiService,
     private _router: Router
@@ -19,6 +20,7 @@ export class Tab1Page implements OnInit {
 
   ngOnInit() {
     this.monuments = this._apiService.placesLatLong;
+    this.vias = this._apiService.viasArray;
   }
 
   seeDetails(item: any) {

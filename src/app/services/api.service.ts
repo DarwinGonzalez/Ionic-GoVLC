@@ -5,6 +5,7 @@ import { Markerinfo } from '../interfaces/markerinfo';
 import * as utm from 'node_modules/utm/index.js';
 import { Observable } from 'rxjs';
 import { Vias } from '../interfaces/vias';
+import { element } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class ApiService {
     this.fill();
     this.parseCSV();
   }
+
   getMonumentJSON(): any {
     return this._http.get('./../../assets/monumentos-turisticos.json').pipe(map(data => data['features']));
   }
@@ -35,8 +37,14 @@ export class ApiService {
     this.getMonumentJSON().subscribe( data => {
       data.forEach(element => {
         const coords = this.getCoordinatesLatLong(element.geometry.coordinates[0], element.geometry.coordinates[1]);
-        const marker = new Markerinfo(element.properties.nombre, coords.latitude, coords.longitude, element.properties.telefono);
+        const marker = new Markerinfo(
+          element.properties.nombre,
+          coords.latitude,
+          coords.longitude,
+          element.properties.codvia,
+          element.properties.telefono);
         this.placesLatLong.push(marker);
+        console.log(marker);
       });
     });
   }
@@ -53,7 +61,20 @@ export class ApiService {
         const via =  new Vias(aux[0], aux[1], aux[2], aux[3], aux[4]);
         this.viasArray.push(via);
       });
+      this.placesLatLong.forEach(element => {
+        element.setVia(this.findStreetName(element.codvia));
+      });
     });
+  }
+
+  findStreetName(codvia: string): Vias {
+    let value: any;
+    this.viasArray.forEach(element => {
+      if (element.getCodvia() === codvia) {
+       value = element;
+      }
+    });
+    return value;
   }
 
 }
