@@ -35,4 +35,9 @@ export class DetailmonumentPage implements OnInit {
       .then(res => console.log("Launched dialer!", res))
       .catch(err => console.log("Error launching dialer", err));
   }
+
+  changeVisitado(value: boolean) {
+    console.log(value);
+    this.monument.setVisitado(!value);
+  }
 }
