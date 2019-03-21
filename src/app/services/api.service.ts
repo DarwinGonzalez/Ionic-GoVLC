@@ -78,15 +78,4 @@ export class ApiService {
     return value;
   }
 
-/*   findMarkerById(id: string): Markerinfo {
-    console.log(id);
-    this.placesLatLong.forEach((element: Markerinfo) => {
-      console.log(element);
-      if (element.getId() === id) {
-        console.log("Lo ha encontrado");
-        this.marker = element;
-      }
-    });
-  } */
-
 }

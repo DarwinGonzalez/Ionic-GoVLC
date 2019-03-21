@@ -29,6 +29,14 @@
     </ion-item>
   </ion-card>
 
+  <ion-card *ngIf="monument.via">
+    <ion-card-content>
+    <ion-item>
+      <ion-label>{{ monument.via.codtipovia }} {{ monument.via.nomoficial }}</ion-label>
+    </ion-item>
+    </ion-card-content>
+  </ion-card>
+
   <ion-card>
     <ion-card-content>
       <ion-label color="danger" *ngIf="!monument.visitado">Usted aún no ha visitado este lugar</ion-label>
