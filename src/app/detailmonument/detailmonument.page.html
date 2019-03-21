@@ -31,8 +31,11 @@
 
   <ion-card *ngIf="monument.via">
     <ion-card-content>
+    <ion-card-header>
+      <ion-card-subtitle>Localización del monumento</ion-card-subtitle>
+    </ion-card-header>
     <ion-item>
-      <ion-label>{{ monument.via.codtipovia }} {{ monument.via.nomoficial }}</ion-label>
+      <ion-label>{{ monument.via.codtipovia }} {{ monument.via.traducnooficial }}</ion-label>
     </ion-item>
     </ion-card-content>
   </ion-card>
