@@ -5,6 +5,7 @@ import { Markerinfo } from '../interfaces/markerinfo';
 import * as utm from 'node_modules/utm/index.js';
 import { Observable } from 'rxjs';
 import { Vias } from '../interfaces/vias';
+import { element } from '@angular/core/src/render3';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class ApiService {
 
   public placesLatLong: Array<Markerinfo>;
   public viasArray: Array<Vias>;
+  public marker: Markerinfo;
 
   constructor(private _http: HttpClient) {
     this.fill();
@@ -41,6 +43,7 @@ export class ApiService {
           coords.latitude,
           coords.longitude,
           element.properties.codvia,
+          element.properties.idnotes,
           element.properties.telefono);
         this.placesLatLong.push(marker);
       });
@@ -74,5 +77,16 @@ export class ApiService {
     });
     return value;
   }
+
+/*   findMarkerById(id: string): Markerinfo {
+    console.log(id);
+    this.placesLatLong.forEach((element: Markerinfo) => {
+      console.log(element);
+      if (element.getId() === id) {
+        console.log("Lo ha encontrado");
+        this.marker = element;
+      }
+    });
+  } */
 
 }

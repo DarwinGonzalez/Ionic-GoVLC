@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Markerinfo } from '../interfaces/markerinfo';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-detailmonument',
@@ -11,10 +12,19 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 export class DetailmonumentPage implements OnInit {
 
   public monument: Markerinfo;
-  constructor(private route: ActivatedRoute, private callNumber: CallNumber) {
-    this.route.params.subscribe( params => {
-      const object = JSON.parse(params['object']);
-      this.monument = object;
+  constructor(
+    private route: ActivatedRoute,
+    private callNumber: CallNumber,
+    private _apiService: ApiService
+  ) {
+    this.route.params.subscribe(params => {
+    const object = JSON.parse(params['object']);
+    console.log(object.id);
+
+    this.monument = object;
+    
+/*  console.log(this._apiService.findMarkerById(object.id))
+    console.log(this.monument); */
     });
    }
 

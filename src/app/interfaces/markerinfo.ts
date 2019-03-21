@@ -7,15 +7,25 @@ export class Markerinfo {
     telefono: string;
     visitado: boolean;
     codvia: string;
-    via?: Vias;
+    via: Vias;
+    id: string;
 
-    constructor(nombre: string, latitude: number, longitude: number, codvia: string,  telefono?: string, visitado?: string, via?: Vias) {
+    constructor(
+        nombre: string,
+        latitude: number,
+        longitude: number,
+        codvia: string,
+        id: string,
+        telefono?: string,
+        visitado?: string,
+        via?: Vias) {
         this.nombre = nombre;
         this.latitude = latitude;
         this.longitude = longitude;
         this.telefono = telefono;
         this.visitado = false;
         this.codvia = codvia;
+        this.id = id;
         this.via = via;
     }
 
@@ -41,6 +51,10 @@ export class Markerinfo {
 
     getCodvia(): string {
         return this.codvia;
+    }
+
+    getId(): string {
+        return this.id;
     }
 
     setVisitado(value: boolean) {
