@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Markerinfo } from '../interfaces/markerinfo';
 import * as utm from 'node_modules/utm/index.js';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class ApiService {
     return utm.toLatLon(valuex, valuey, 30, 's');
   }
 
-  getCSVContent(): any {
-    return this._http.get('./../../assets/vias.csv');
+  getCSVContent():  Observable<any> {
+    return this._http.get( './../../assets/vias.csv', {responseType: 'text'});
   }
 
   fill() {
@@ -31,7 +32,7 @@ export class ApiService {
     this.getMonumentJSON().subscribe( data => {
       data.forEach(element => {
         const coords = this.getCoordinatesLatLong(element.geometry.coordinates[0], element.geometry.coordinates[1]);
-        let marker = new Markerinfo(element.properties.nombre, coords.latitude, coords.longitude, element.properties.telefono);
+        const marker = new Markerinfo(element.properties.nombre, coords.latitude, coords.longitude, element.properties.telefono);
         this.placesLatLong.push(marker);
       });
     });
