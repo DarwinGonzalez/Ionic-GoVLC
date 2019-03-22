@@ -1,6 +1,5 @@
 import { ApiService } from './../services/api.service';
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 declare var google;
 
@@ -14,7 +13,7 @@ export class Tab2Page implements OnInit {
   @ViewChild('map') mapElement;
   map: any;
 
-  constructor(private _apiService: ApiService, private geolocation: Geolocation){
+  constructor(private _apiService: ApiService){
     this._apiService.getMonumentJSON().subscribe( () => {
       this._apiService.placesLatLong.forEach(data => {
         if (data.telefono === '0') {
@@ -45,17 +44,14 @@ export class Tab2Page implements OnInit {
 
   initMap() {
     const coords = new google.maps.LatLng(39.4767088559305, -0.37814708266530195);
+
     const mapOptions: google.maps.MapOptions = {
       center: coords,
       zoom: 12,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    const marker: google.maps.Marker = new google.maps.Marker({
-      map: this.map,
-      position: coords,
-    });
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
     this._apiService.getUserLocation(this.map);
   }

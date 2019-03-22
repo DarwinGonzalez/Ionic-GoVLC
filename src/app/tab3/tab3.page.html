@@ -8,7 +8,7 @@
 
 <ion-content>
   <ion-card>
-      <img src="../../assets/map_parking_icon-01.png">
+      <img src="../../assets/images/logo_govlc.png">
       <ion-card-header>
         <ion-card-title>Aplicación GoVLC</ion-card-title>
       </ion-card-header>
@@ -18,4 +18,23 @@
           observar donde se encuentran tus monumentos favoritos.
       </ion-card-content>
     </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+          <ion-card-title>Lugares visitados</ion-card-title>
+        </ion-card-header>
+  
+        <ion-card-content>
+            Aqui podrás ver una lista de lugares que ya has visitado.
+
+            <ion-list *ngFor="let item of visited">
+                <ion-item (click)="seeDetails(item)">
+                  <ion-avatar slot="start">
+                      <img src="../../assets/images/visited.png">
+                  </ion-avatar>
+                  <ion-label>{{ item.nombre }}</ion-label>
+                </ion-item>
+              </ion-list>
+        </ion-card-content>
+      </ion-card>
 </ion-content>

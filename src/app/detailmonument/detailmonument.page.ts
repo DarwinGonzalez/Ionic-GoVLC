@@ -37,7 +37,10 @@ export class DetailmonumentPage implements OnInit {
   }
 
   changeVisitado(value: boolean) {
-    console.log(value);
     this.monument.setVisitado(!value);
+    if (!value === true) {
+      this._apiService.visitedPlaces.push(this.monument);
+    }
+    console.log(this._apiService.visitedPlaces);
   }
 }

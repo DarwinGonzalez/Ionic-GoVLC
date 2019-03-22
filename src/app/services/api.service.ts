@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Markerinfo } from '../interfaces/markerinfo';
-import * as utm from 'node_modules/utm/index.js';
 import { Observable } from 'rxjs';
 import { Vias } from '../interfaces/vias';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import * as utm from 'node_modules/utm/index.js';
 
 declare var google;
 @Injectable({
@@ -14,12 +14,14 @@ declare var google;
 export class ApiService {
 
   public placesLatLong: Array<Markerinfo>;
+  public visitedPlaces: Array<Markerinfo>;
   public viasArray: Array<Vias>;
   public marker: Markerinfo;
   public markersMap: Array<any>;
 
   constructor(private _http: HttpClient, private geolocation: Geolocation) {
     this.markersMap = [];
+    this.visitedPlaces = [];
     this.fill();
     this.parseCSV();
   }
