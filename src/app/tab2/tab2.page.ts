@@ -1,5 +1,5 @@
 import { ApiService } from './../services/api.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 declare var google;
@@ -9,7 +9,7 @@ declare var google;
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
   @ViewChild('map') mapElement;
   map: any;
@@ -18,13 +18,25 @@ export class Tab2Page {
     this._apiService.getMonumentJSON().subscribe( () => {
       this._apiService.placesLatLong.forEach(data => {
         if (data.telefono === '0') {
-          this.setMarkers(data.nombre, data.latitude, data.longitude, 'No hay un teléfono disponible');
+         this._apiService.createMarkers(
+          data.nombre,
+          data.latitude,
+          data.longitude,
+          this.map,
+          'No hay un teléfono disponible',
+          data.visitado);
         } else {
-          this.setMarkers(data.nombre, data.latitude, data.longitude, data.telefono);
+          this._apiService.createMarkers(
+            data.nombre,
+            data.latitude,
+            data.longitude,
+            this.map,
+            data.telefono,
+            data.visitado
+          );
         }
       });
     });
-
   }
 
   ngOnInit(): void {
@@ -45,73 +57,6 @@ export class Tab2Page {
       position: coords,
     });
 
-    this.geolocation.getCurrentPosition().then((resp) => {
-      const coords = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-      const contentString = `
-      <div id="content">
-        <h1 id="firstHeading" class="firstHeading">You are here!</h1>
-        <div id="bodyContent">
-          <p>This marker represents where you are in the map</p>
-        </div>
-      </div>`;
-
-      const infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-
-      const userMarker: google.maps.Marker = new google.maps.Marker({
-        map: this.map,
-        position: coords,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-      });
-
-      userMarker.addListener('click', function() {
-        infowindow.open(this.map, userMarker);
-      });
-
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
-  }
-
-  setMarkers(nombre: string, lat: number, long: number, telefono?: string) {
-    const contentStringTelephone = `
-    <div id="content">
-      <h1 id="firstHeading" class="firstHeading">${nombre}</h1>
-      <div id="bodyContent">
-        <p><b>Teléfono:</b> ${telefono} <ion-button color="success">Llamar</ion-button></p>
-      </div>
-    </div>`;
-
-    const contentStringNoTelephone = `
-    <div id="content">
-      <h1 id="firstHeading" class="firstHeading">${nombre}</h1>
-      <div id="bodyContent">
-        <p><b>Teléfono:</b> ${telefono}</p>
-      </div>
-    </div>`;
-
-    const coords = new google.maps.LatLng(lat, long);
-    const marker: google.maps.Marker = new google.maps.Marker({
-      map: this.map,
-      position: coords,
-    });
-
-    if (telefono  === 'No hay un teléfono disponible') {
-      const infowindow = new google.maps.InfoWindow({
-        content: contentStringNoTelephone
-      });
-      marker.addListener('click', function() {
-        infowindow.open(this.map, marker);
-      });
-    } else {
-      const infowindow = new google.maps.InfoWindow({
-        content: contentStringTelephone
-      });
-      marker.addListener('click', function() {
-        infowindow.open(this.map, marker);
-      });
-    }
-
+    this._apiService.getUserLocation(this.map);
   }
 }

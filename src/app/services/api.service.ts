@@ -5,8 +5,9 @@ import { Markerinfo } from '../interfaces/markerinfo';
 import * as utm from 'node_modules/utm/index.js';
 import { Observable } from 'rxjs';
 import { Vias } from '../interfaces/vias';
-import { element } from '@angular/core/src/render3';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+declare var google;
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +16,10 @@ export class ApiService {
   public placesLatLong: Array<Markerinfo>;
   public viasArray: Array<Vias>;
   public marker: Markerinfo;
+  public markersMap: Array<any>;
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient, private geolocation: Geolocation) {
+    this.markersMap = [];
     this.fill();
     this.parseCSV();
   }
@@ -76,6 +79,79 @@ export class ApiService {
       }
     });
     return value;
+  }
+
+  createMarkers(nombre: string, lat: number, long: number, mainMap: any, telefono?: string, visitado?: boolean) {
+    const contentStringTelephone = `
+    <div id="content">
+      <h1 id="firstHeading" class="firstHeading">${nombre}</h1>
+      <div id="bodyContent">
+        <p><b>Teléfono:</b> ${telefono} <ion-button color="success">Llamar</ion-button></p>
+        <p> Este lugar ha sido: ${visitado}</p>
+      </div>
+    </div>`;
+
+    const contentStringNoTelephone = `
+    <div id="content">
+      <h1 id="firstHeading" class="firstHeading">${nombre}</h1>
+      <div id="bodyContent">
+        <p><b>Teléfono:</b> ${telefono}</p>
+      </div>
+    </div>`;
+
+    const coords = new google.maps.LatLng(lat, long);
+    const marker: google.maps.Marker = new google.maps.Marker({
+      map: mainMap,
+      position: coords,
+    });
+
+    if (telefono  === 'No hay un teléfono disponible') {
+      const infowindow = new google.maps.InfoWindow({
+        content: contentStringNoTelephone
+      });
+      marker.addListener('click', function() {
+        infowindow.open(this.map, marker);
+      });
+    } else {
+      const infowindow = new google.maps.InfoWindow({
+        content: contentStringTelephone
+      });
+      marker.addListener('click', function() {
+        infowindow.open(this.map, marker);
+      });
+    }
+
+    this.markersMap.push(marker);
+  }
+
+  getUserLocation(mainMap: any) {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      const coords = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      const contentString = `
+      <div id="content">
+        <h1 id="firstHeading" class="firstHeading">You are here!</h1>
+        <div id="bodyContent">
+          <p>This marker represents where you are in the map</p>
+        </div>
+      </div>`;
+
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      const userMarker: google.maps.Marker = new google.maps.Marker({
+        map: mainMap,
+        position: coords,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+      });
+
+      userMarker.addListener('click', function() {
+        infowindow.open(this.map, userMarker);
+      });
+
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
   }
 
 }
