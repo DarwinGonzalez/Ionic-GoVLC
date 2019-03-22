@@ -19,22 +19,9 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card>
-        <ion-card-header>
-          <ion-card-title>Lugares visitados</ion-card-title>
-        </ion-card-header>
-  
-        <ion-card-content>
-            Aqui podrás ver una lista de lugares que ya has visitado.
-
-            <ion-list *ngFor="let item of visited">
-                <ion-item (click)="seeDetails(item)">
-                  <ion-avatar slot="start">
-                      <img src="../../assets/images/visited.png">
-                  </ion-avatar>
-                  <ion-label>{{ item.nombre }}</ion-label>
-                </ion-item>
-              </ion-list>
-        </ion-card-content>
-      </ion-card>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button (click)="seeVisited()">
+            <ion-icon name="ios-list-box"></ion-icon>
+          </ion-fab-button>
+      </ion-fab>
 </ion-content>

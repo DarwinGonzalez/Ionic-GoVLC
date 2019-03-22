@@ -21,7 +21,6 @@ export class DetailmonumentPage implements OnInit {
       this._apiService.placesLatLong.forEach(element => {
         if (element.getId() === object.id) {
           this.monument = element;
-          console.log(this.monument);
         }
       });
     });

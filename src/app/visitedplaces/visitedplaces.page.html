@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Lugares visitados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngIf="visited.length > 0">
+    <ion-card-header>
+      <ion-card-title>Lugares visitados</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      En esta sección podrás observar un historial de los diferentes monumentos que has visitado.
+
+
+      <ion-list *ngFor="let item of visited">
+        <ion-item (click)="seeDetails(item)">
+          <ion-avatar slot="start">
+            <img src="../../assets/images/visited.png">
+          </ion-avatar>
+          <ion-label>{{ item.nombre }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="visited.length === 0">
+      <ion-card-header>
+          <ion-card-title>Lugares visitados</ion-card-title>
+        </ion-card-header>
+    
+        <ion-card-content>
+          <img src="../../assets/images/walker.png" style="margin-bottom: 25px;">
+          Aún no has visitado ningún monumento, ¿a qué esperas?
+        </ion-card-content>
+  </ion-card>
+</ion-content>

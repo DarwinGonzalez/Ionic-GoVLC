@@ -35,6 +35,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../tab3/tab3.module#Tab3PageModule'
+          },
+          {
+            path: 'visitedplaces',
+            loadChildren: '../visitedplaces/visitedplaces.module#VisitedplacesPageModule'
           }
         ]
       },

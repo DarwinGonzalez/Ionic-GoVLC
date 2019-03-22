@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Markerinfo } from '../interfaces/markerinfo';
-import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,14 +8,10 @@ import { Router } from '@angular/router';
 })
 export class Tab3Page {
 
-  public visited: Array<Markerinfo>;
+  constructor(private _router: Router) {}
 
-  constructor(private _apiService: ApiService, private _router: Router) {
-    this.visited = this._apiService.visitedPlaces;
-  }
-
-  seeDetails(item: any) {
-    this._router.navigate(['/tabs/tab1/details', JSON.stringify(item)]);
+  seeVisited() {
+    this._router.navigate(['/tabs/tab3/visitedplaces']);
   }
 
 }
