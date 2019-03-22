@@ -89,7 +89,6 @@ export class ApiService {
       <h1 id="firstHeading" class="firstHeading">${nombre}</h1>
       <div id="bodyContent">
         <p><b>Teléfono:</b> ${telefono} <ion-button color="success">Llamar</ion-button></p>
-        <p> Este lugar ha sido: ${visitado}</p>
       </div>
     </div>`;
 

@@ -43,6 +43,5 @@ export class DetailmonumentPage implements OnInit {
     } else {
       this._apiService.removeFromvisitedPlaces(this.monument);
     }
-    console.log(this._apiService.visitedPlaces);
   }
 }
