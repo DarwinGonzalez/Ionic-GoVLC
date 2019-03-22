@@ -42,8 +42,19 @@
 
   <ion-card>
     <ion-card-content>
-      <ion-label color="danger" *ngIf="!monument.visitado">Usted aún no ha visitado este lugar</ion-label>
-      <ion-label color="success" *ngIf="monument.visitado">Usted ya ha visitado este lugar</ion-label>
+      <ion-label color="danger" *ngIf="!monument.visitado">
+        <ion-avatar slot="start">
+          <img src="../../assets/not_visited.png">
+        </ion-avatar>
+        Usted aún no ha visitado este lugar
+      </ion-label>
+    
+      <ion-label color="success" *ngIf="monument.visitado">
+        <ion-avatar slot="start">
+          <img src="../../assets/visited.png">
+        </ion-avatar>
+        Usted ya ha visitado este lugar
+      </ion-label>
     </ion-card-content>
     <ion-toggle color="secondary" (click)="changeVisitado(monument.visitado)"></ion-toggle>
   </ion-card>
