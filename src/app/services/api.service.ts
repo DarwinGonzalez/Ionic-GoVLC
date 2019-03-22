@@ -156,4 +156,7 @@ export class ApiService {
      });
   }
 
+  removeFromvisitedPlaces(item: Markerinfo) {
+    this.visitedPlaces.splice(this.visitedPlaces.findIndex(element => element.getId() === item.getId()), 1);
+  }
 }

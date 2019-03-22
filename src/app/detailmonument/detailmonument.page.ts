@@ -40,6 +40,8 @@ export class DetailmonumentPage implements OnInit {
     this.monument.setVisitado(!value);
     if (!value === true) {
       this._apiService.visitedPlaces.push(this.monument);
+    } else {
+      this._apiService.removeFromvisitedPlaces(this.monument);
     }
     console.log(this._apiService.visitedPlaces);
   }
