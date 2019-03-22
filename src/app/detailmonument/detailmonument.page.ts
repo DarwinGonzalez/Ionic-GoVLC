@@ -1,13 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Markerinfo } from "../interfaces/markerinfo";
-import { CallNumber } from "@ionic-native/call-number/ngx";
-import { ApiService } from "../services/api.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Markerinfo } from '../interfaces/markerinfo';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { ApiService } from '../services/api.service';
 
 @Component({
-  selector: "app-detailmonument",
-  templateUrl: "./detailmonument.page.html",
-  styleUrls: ["./detailmonument.page.scss"]
+  selector: 'app-detailmonument',
+  templateUrl: './detailmonument.page.html',
+  styleUrls: ['./detailmonument.page.scss']
 })
 export class DetailmonumentPage implements OnInit {
   public monument: Markerinfo;
@@ -17,7 +17,7 @@ export class DetailmonumentPage implements OnInit {
     private _apiService: ApiService
   ) {
     this.route.params.subscribe(params => {
-      const object = JSON.parse(params["object"]);
+      const object = JSON.parse(params['object']);
       this._apiService.placesLatLong.forEach(element => {
         if (element.getId() === object.id) {
           this.monument = element;
@@ -31,11 +31,12 @@ export class DetailmonumentPage implements OnInit {
   makeCall(telefono: string) {
     this.callNumber
       .callNumber(telefono, true)
-      .then(res => console.log("Launched dialer!", res))
-      .catch(err => console.log("Error launching dialer", err));
+      .then(res => console.log('Launched dialer!', res))
+      .catch(err => console.log('Error launching dialer', err));
   }
 
   changeVisitado(value: boolean) {
+    // It must let you choose the date when you visited the monument
     this.monument.setVisitado(!value);
     if (!value === true) {
       this._apiService.visitedPlaces.push(this.monument);
