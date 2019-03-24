@@ -39,6 +39,10 @@ const routes: Routes = [
           {
             path: 'visitedplaces',
             loadChildren: '../visitedplaces/visitedplaces.module#VisitedplacesPageModule'
+          },
+          {
+            path: 'search',
+            loadChildren: '../search/search.module#SearchPageModule'
           }
         ]
       },

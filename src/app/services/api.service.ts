@@ -15,6 +15,7 @@ export class ApiService {
 
   public placesLatLong: Array<Markerinfo>;
   public visitedPlaces: Array<Markerinfo>;
+  public searchedPlaces: Array<Markerinfo>;
   public viasArray: Array<Vias>;
   public marker: Markerinfo;
   public markersMap: Array<any>;
@@ -157,5 +158,19 @@ export class ApiService {
 
   removeFromvisitedPlaces(item: Markerinfo) {
     this.visitedPlaces.splice(this.visitedPlaces.findIndex(element => element.getId() === item.getId()), 1);
+  }
+
+  searchByMonumentName(term: string): Array<Markerinfo> {
+    const values = [];
+    this.placesLatLong.forEach(element => {
+      if (element.nombre.includes(term)) {
+       values.push(element);
+      }
+    });
+    return values;
+  }
+
+  removeSearchedPlacesContent(){
+    this.searchedPlaces = [];
   }
 }

@@ -20,8 +20,16 @@
     </ion-card>
 
       <ion-fab vertical="top" horizontal="end" slot="fixed">
-          <ion-fab-button (click)="seeVisited()" color="success">
-            <ion-icon name="ios-list-box"></ion-icon>
+          <ion-fab-button>
+            <ion-icon name="ios-arrow-down"></ion-icon>
           </ion-fab-button>
-      </ion-fab>
+          <ion-fab-list side="bottom">
+              <ion-fab-button (click)="seeVisited()" color="success">
+                <ion-icon name="ios-list-box"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-button (click)="search()" color="success">
+                <ion-icon name="ios-search" ></ion-icon>
+              </ion-fab-button>
+          </ion-fab-list>
+        </ion-fab>
 </ion-content>

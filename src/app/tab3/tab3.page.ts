@@ -14,4 +14,8 @@ export class Tab3Page {
     this._router.navigate(['/tabs/tab3/visitedplaces']);
   }
 
+  search() {
+    this._router.navigate(['/tabs/tab3/search']);
+  }
+
 }
