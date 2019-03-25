@@ -18,4 +18,8 @@ export class Tab3Page {
     this._router.navigate(['/tabs/tab3/search']);
   }
 
+  nearPlaces() {
+    this._router.navigate(['/tabs/tab3/nearplaces']);
+  }
+
 }

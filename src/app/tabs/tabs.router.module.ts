@@ -43,7 +43,11 @@ const routes: Routes = [
           {
             path: 'search',
             loadChildren: '../search/search.module#SearchPageModule'
-          }
+          },
+          {
+            path: 'nearplaces',
+            loadChildren: '../nearplaces/nearplaces.module#NearplacesPageModule'
+          },
         ]
       },
       {

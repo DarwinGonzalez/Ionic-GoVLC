@@ -4,17 +4,20 @@ import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-visitedplaces',
-  templateUrl: './visitedplaces.page.html',
-  styleUrls: ['./visitedplaces.page.scss'],
+  selector: 'app-nearplaces',
+  templateUrl: './nearplaces.page.html',
+  styleUrls: ['./nearplaces.page.scss'],
 })
-export class VisitedplacesPage implements OnInit {
+export class NearplacesPage implements OnInit {
 
-  public visited: Array<Markerinfo>;
+  public nearPlaces: Array<Markerinfo>;
 
   constructor(private _apiService: ApiService, private _router: Router) {
-    this.visited = this._apiService.visitedPlaces;
-  }
+    this.nearPlaces = [];
+    setTimeout(() => {
+      this.nearPlaces = this._apiService.searchNearbyMonuments(6);
+    });
+   }
 
   ngOnInit() {
   }
@@ -22,5 +25,4 @@ export class VisitedplacesPage implements OnInit {
   seeDetails(item: any) {
     this._router.navigate(['/tabs/tab1/details', JSON.stringify(item)]);
   }
-
 }
