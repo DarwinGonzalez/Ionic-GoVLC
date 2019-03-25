@@ -25,8 +25,14 @@ export class ApiService {
   constructor(private _http: HttpClient, private geolocation: Geolocation) {
     this.markersMap = [];
     this.visitedPlaces = [];
+    this.userCoords = [];
     this.fill();
     this.parseCSV();
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.userCoords.push(resp.coords.latitude);
+      this.userCoords.push(resp.coords.longitude);
+    });
+    console.log(this.userCoords);
   }
 
   getMonumentJSON(): any {
