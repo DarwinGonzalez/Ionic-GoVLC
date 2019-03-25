@@ -15,7 +15,6 @@ export class Tab1Page implements OnInit {
     private _apiService: ApiService,
     private _router: Router
   ) {
-
   }
 
   ngOnInit() {

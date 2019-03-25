@@ -16,9 +16,11 @@ export class ApiService {
   public placesLatLong: Array<Markerinfo>;
   public visitedPlaces: Array<Markerinfo>;
   public searchedPlaces: Array<Markerinfo>;
+  public nearPlaces: Array<Markerinfo>;
   public viasArray: Array<Vias>;
   public marker: Markerinfo;
   public markersMap: Array<any>;
+  public userCoords: Array<any>;
 
   constructor(private _http: HttpClient, private geolocation: Geolocation) {
     this.markersMap = [];
@@ -129,6 +131,9 @@ export class ApiService {
   getUserLocation(mainMap: any) {
     this.geolocation.getCurrentPosition().then((resp) => {
       const coords = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      this.userCoords.push(resp.coords.latitude);
+      this.userCoords.push(resp.coords.longitude);
+
       const contentString = `
       <div id="content">
         <h1 id="firstHeading" class="firstHeading">You are here!</h1>
@@ -163,14 +168,31 @@ export class ApiService {
   searchByMonumentName(term: string): Array<Markerinfo> {
     const values = [];
     this.placesLatLong.forEach(element => {
-      if (element.nombre.includes(term)) {
+      if (((element.nombre).toLowerCase()).includes(term.toLowerCase())) {
        values.push(element);
       }
     });
     return values;
   }
 
-  removeSearchedPlacesContent(){
+  removeSearchedPlacesContent() {
     this.searchedPlaces = [];
+  }
+
+  searchNearbyMonuments(dist: number): Array<Markerinfo> {
+    const values = [];
+    this.placesLatLong.forEach(element => {
+      if (this.distance(element.getLatitude(), element.getLongitude()) <= dist) {
+       values.push(element);
+      }
+    });
+    return values;
+  }
+
+  distance(lat1: number, lon1: number) {
+    const R = 6371; // Earth's radius in Km
+    return Math.acos(Math.sin(lat1) * Math.sin(39.4791922) +
+                    Math.cos(lat1) * Math.cos(39.4791922) *
+                    Math.cos( (-0.375031) - lon1)) * R;
   }
 }

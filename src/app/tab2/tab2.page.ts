@@ -40,6 +40,9 @@ export class Tab2Page implements OnInit {
 
   ngOnInit(): void {
     this.initMap();
+/*     setInterval(() => {
+      console.log(this._apiService.searchNearbyMonuments());
+    }, 5000); */
   }
 
   initMap() {
