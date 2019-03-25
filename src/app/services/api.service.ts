@@ -182,17 +182,17 @@ export class ApiService {
   searchNearbyMonuments(dist: number): Array<Markerinfo> {
     const values = [];
     this.placesLatLong.forEach(element => {
-      if (this.distance(element.getLatitude(), element.getLongitude()) <= dist) {
+      if (this.distance(element.getLatitude(), element.getLongitude(), this.userCoords[0], this.userCoords[1] ) <= dist) {
        values.push(element);
       }
     });
     return values;
   }
 
-  distance(lat1: number, lon1: number) {
+  distance(lat1: number, lon1: number, lat2: number, lon2: number) {
     const R = 6371; // Earth's radius in Km
-    return Math.acos(Math.sin(lat1) * Math.sin(39.4791922) +
-                    Math.cos(lat1) * Math.cos(39.4791922) *
-                    Math.cos( (-0.375031) - lon1)) * R;
+    return Math.acos(Math.sin(lat1) * Math.sin(lat2) +
+                    Math.cos(lat1) * Math.cos(lat2) *
+                    Math.cos(lon2 - lon1)) * R;
   }
 }
