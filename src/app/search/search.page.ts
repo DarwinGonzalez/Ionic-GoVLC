@@ -19,18 +19,21 @@ export class SearchPage implements OnInit {
 
   ngOnInit() {}
 
+  // Functions that find places base on a term that the user input in this tab
   findPlaces(){
     console.log(this.term);
     this.searchPlaces = this._apiService.searchByMonumentName(this.term);
     console.log(this.searchPlaces);
   }
 
+  // Function that clean the data of the last search
   cleanPlaces() {
     this.searchPlaces = [];
     this.term = '';
     this._apiService.removeSearchedPlacesContent();
   }
 
+  // Fucntion that makes posible goes to the details page of a place that is near you
   seeDetails(item: any) {
     this._router.navigate(['/tabs/tab1/details', JSON.stringify(item)]);
   }

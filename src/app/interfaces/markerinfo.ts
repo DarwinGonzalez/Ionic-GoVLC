@@ -1,5 +1,6 @@
 import { Vias } from './vias';
 
+// Class that represents every marker/point in the map
 export class Markerinfo {
     nombre: string;
     latitude: number;

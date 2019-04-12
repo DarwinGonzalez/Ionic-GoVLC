@@ -28,6 +28,7 @@ export class DetailmonumentPage implements OnInit {
 
   ngOnInit() {}
 
+  // Function use to make a call if the monument have it available
   makeCall(telefono: string) {
     this.callNumber
       .callNumber(telefono, true)
@@ -35,8 +36,8 @@ export class DetailmonumentPage implements OnInit {
       .catch(err => console.log('Error launching dialer', err));
   }
 
+  // Functio to change the state if a monument is visited or not
   changeVisitado(value: boolean) {
-    // It must let you choose the date when you visited the monument
     this.monument.setVisitado(!value);
     if (!value === true) {
       this._apiService.visitedPlaces.push(this.monument);

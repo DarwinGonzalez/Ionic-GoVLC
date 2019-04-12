@@ -35,18 +35,22 @@ export class ApiService {
     console.log(this.userCoords);
   }
 
+  // Function that get the content of the JSON with the data and return features object
   getMonumentJSON(): any {
     return this._http.get('./../../assets/monumentos-turisticos.json').pipe(map(data => data['features']));
   }
 
+  // Function that obtain coordinates in lat/long from utm coordinates
   getCoordinatesLatLong(valuex: string, valuey: string) {
     return utm.toLatLon(valuex, valuey, 30, 's');
   }
 
+  // Function that returns the csv content
   getCSVContent():  Observable<any> {
     return this._http.get( './../../assets/vias.csv', {responseType: 'text'});
   }
 
+  // Function that create the global object with all the data necesary
   fill() {
     this.placesLatLong = [];
     this.getMonumentJSON().subscribe( data => {
@@ -64,6 +68,7 @@ export class ApiService {
     });
   }
 
+  // Function that parse the csv file and create the objects that are need it
   parseCSV() {
     let rawTextContent = '';
     let rawTextContentArray = [];
@@ -82,6 +87,7 @@ export class ApiService {
     });
   }
 
+  // Function that find the street name using the codvia
   findStreetName(codvia: string): Vias {
     let value: any;
     this.viasArray.forEach(element => {
@@ -92,6 +98,7 @@ export class ApiService {
     return value;
   }
 
+  // Function that create markers object used by google maps API
   createMarkers(nombre: string, lat: number, long: number, mainMap: any, telefono?: string, visitado?: boolean) {
     const contentStringTelephone = `
     <div id="content">
@@ -134,6 +141,7 @@ export class ApiService {
     this.markersMap.push(marker);
   }
 
+  // Function that get the position of the user and make a marker for it
   getUserLocation(mainMap: any) {
     this.geolocation.getCurrentPosition().then((resp) => {
       const coords = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
@@ -167,10 +175,12 @@ export class ApiService {
      });
   }
 
+  // Function that remove the content of visited places object
   removeFromvisitedPlaces(item: Markerinfo) {
     this.visitedPlaces.splice(this.visitedPlaces.findIndex(element => element.getId() === item.getId()), 1);
   }
 
+  // Function that search the monument by a term
   searchByMonumentName(term: string): Array<Markerinfo> {
     const values = [];
     this.placesLatLong.forEach(element => {
@@ -181,10 +191,12 @@ export class ApiService {
     return values;
   }
 
+  // Function that clean the content of searched places object
   removeSearchedPlacesContent() {
     this.searchedPlaces = [];
   }
 
+  // Function that search near places base on a distance parameter
   searchNearbyMonuments(dist: number): Array<Markerinfo> {
     const values = [];
     this.placesLatLong.forEach(element => {
@@ -195,6 +207,7 @@ export class ApiService {
     return values;
   }
 
+  // Function that return the distance between the user position and a coordinates given
   distance(lat1: number, lon1: number, lat2: number, lon2: number) {
     const R = 6371; // Earth's radius in Km
     return Math.acos(Math.sin(lat1) * Math.sin(lat2) +

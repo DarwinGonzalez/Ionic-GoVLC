@@ -1,3 +1,4 @@
+// Class that represents a Via Object that goes inside a marker
 export class Vias {
     codtipovia: string;
     codvia: string;
