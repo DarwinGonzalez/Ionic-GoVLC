@@ -37,5 +37,7 @@ La aplicación además cuanta con un apartado donde podemos observar los diferen
 </p>
 
 GoVLC es capaz también de situarnos en el mapa en tiempo real con un marcador de color verde que se posicionará en la localización del usuario de la aplicación, desplazándose con el.
-
+<p align="center">
+<img src="https://github.com/DarwinGonzalez/Ionic-GoVLC/blob/master/src/assets/images/usermarker.png?raw=true" width="40%">
+</p>
 
