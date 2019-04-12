@@ -30,6 +30,12 @@ Tal y como se ha dicho previamente mediante el botón de la lupa también se pod
 <img src="https://github.com/DarwinGonzalez/Ionic-GoVLC/blob/master/src/assets/images/search.gif?raw=true" width="40%">
 </p>
 
-https://tech.tribalyte.eu/wp-content/uploads/2018/05/ionic.png
+La aplicación además cuanta con un apartado donde podemos observar los diferentes monumentos en un mapa. Estos marcadores son interactivos y permiten presionar sobre ellos y ver cual es el monumento en cuestión. Por otra parte si el monumento tiene disponible un número de teléfono se podrá realizar una llamada al mismo presionando el botón de llamar. Si el monumento no tiene teléfono asociado se informará de ello.
 
-To be continued...
+<p align="center">
+<img src="https://github.com/DarwinGonzalez/Ionic-GoVLC/blob/master/src/assets/images/markers.gif?raw=true" width="40%">
+</p>
+
+GoVLC es capaz también de situarnos en el mapa en tiempo real con un marcador de color verde que se posicionará en la localización del usuario de la aplicación, desplazándose con el.
+
+
