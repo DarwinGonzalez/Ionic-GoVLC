@@ -48,7 +48,7 @@
         </ion-avatar>
         Usted aún no ha visitado este lugar
       </ion-label>
-    
+
       <ion-label color="success" *ngIf="monument.visitado">
         <ion-avatar slot="start">
           <img src="../../assets/images/visited.png">
@@ -59,4 +59,6 @@
     <ion-toggle color="secondary" (click)="changeVisitado(monument.visitado)"></ion-toggle>
   </ion-card>
 
+  <ion-button color="success" (click)="takePicture()">Toma una foto</ion-button>
+  <img [src]="image" *ngIf="image" />
 </ion-content>
