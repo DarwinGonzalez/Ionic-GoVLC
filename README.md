@@ -19,9 +19,14 @@ Haciendo *click* en el botón que se nos muestra nos saldrán tres opciones nece
 <img src="https://github.com/DarwinGonzalez/Ionic-GoVLC/blob/master/src/assets/images/optionslandingpage.png?raw=true" width="40%">
 </p>
 
-Además, la aplicación cuenta con la posibilidad de listar los diferentes monumentos de la ciudad de Valencia, pudiendo mostrar diferentes características de cada uno de ellos y  marcarlos como visitados.
+Además, la aplicación cuenta con la posibilidad de listar los diferentes monumentos de la ciudad de Valencia, pudiendo mostrar diferentes características de cada uno de ellos y marcarlos como visitados.
 <p align="center">
 <img src="https://github.com/DarwinGonzalez/Ionic-GoVLC/blob/master/src/assets/images/monuments_list.gif?raw=true" width="40%">
+</p>
+
+En este apartado también es posible sacar fotos desde la cámara del dispositivo y relacionarlas con el monumento en cuestión.
+<p align="center">
+<img src="https://github.com/DarwinGonzalez/Ionic-GoVLC/blob/master/src/assets/images/takephoto.gif?raw=true" width="40%">
 </p>
 
 Tal y como se ha dicho previamente mediante el botón de la lupa también se podrá buscar y filtrar cada uno de los monumentos en base a palabras o términos de búsqueda que decida el usuario. A continuación podemos ver un ejemplo gráfico de como se utilizaría.
