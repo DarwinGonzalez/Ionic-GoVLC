@@ -214,4 +214,8 @@ export class ApiService {
                     Math.cos(lat1) * Math.cos(lat2) *
                     Math.cos(lon2 - lon1)) * R;
   }
+
+  addImageToMonument(image: string, monument: Markerinfo){
+    monument.images.push(image);
+  }
 }

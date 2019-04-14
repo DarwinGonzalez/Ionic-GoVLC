@@ -56,6 +56,8 @@ export class DetailmonumentPage implements OnInit {
   }).then((data) => {
 
       this.image = "data:image/jpeg;base64," + data;
+      this._apiService.addImageToMonument(this.image, this.monument);
+      console.log(this.monument);
 
   }, (error) => {
 

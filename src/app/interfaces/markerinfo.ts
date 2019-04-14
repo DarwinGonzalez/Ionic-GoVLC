@@ -10,6 +10,7 @@ export class Markerinfo {
     codvia: string;
     via: Vias;
     id: string;
+    images: Array<any>;
 
     constructor(
         nombre: string,
@@ -28,6 +29,7 @@ export class Markerinfo {
         this.codvia = codvia;
         this.id = id;
         this.via = via;
+        this.images = [];
     }
 
     getNombre() {
@@ -64,5 +66,9 @@ export class Markerinfo {
 
     setVia(nombre: Vias) {
         this.via = nombre;
+    }
+
+    getImages(){
+        return this.images;
     }
 }

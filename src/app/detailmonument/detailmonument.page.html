@@ -60,5 +60,8 @@
   </ion-card>
 
   <ion-button color="success" (click)="takePicture()">Toma una foto</ion-button>
-  <img [src]="image" *ngIf="image" />
+  <ion-card-content *ngFor="let item of monument.images">
+    <img [src]="item" *ngIf="item" />
+  </ion-card-content>
+
 </ion-content>
