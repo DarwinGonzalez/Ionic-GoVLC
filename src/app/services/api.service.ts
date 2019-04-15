@@ -32,7 +32,6 @@ export class ApiService {
       this.userCoords.push(resp.coords.latitude);
       this.userCoords.push(resp.coords.longitude);
     });
-    console.log(this.userCoords);
   }
 
   // Function that get the content of the JSON with the data and return features object
