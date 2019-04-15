@@ -62,6 +62,10 @@
   <ion-button color="success" (click)="takePicture()">Toma una foto</ion-button>
   <ion-card-content *ngFor="let item of monument.images">
     <img [src]="item" *ngIf="item" />
+    <ion-button expand="full" (click)="shareTwitter()">Share on Twitter</ion-button>
+    <ion-button expand="full" (click)="shareEmail()">Share by Email</ion-button>
+    <ion-button expand="full" (click)="shareFacebook()">Share on Facebook</ion-button>
+    <ion-button expand="full" (click)="shareWhatsApp()">Share with WhatsApp</ion-button>
   </ion-card-content>
 
 </ion-content>
