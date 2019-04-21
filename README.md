@@ -2,12 +2,12 @@
 <p align="center">
 <img src="https://tech.tribalyte.eu/wp-content/uploads/2018/05/ionic.png" width="20%" heith="20%">
 </p>
-El objetivo de este repositorio es desarrollar un prototipo funcional de una aplicación móvil orientada mejorar y 
-promover la visita de los diferentes monumentos con los que cuenta la ciudad de Valencia. Así pues, en ella se podrá observar en un mapa los diferentes monumentos más cercanos a el usuario que este usando la aplicación entre otras funciones.
+El objetivo de este repositorio es el desarrollo de un prototipo funcional de una aplicación móvil, orientada a mejorar y 
+promover la visita de los diferentes monumentos con los que cuenta la ciudad de Valencia.
 
 ### Estructura y distribución del prototipo
 
-A continuación se procederá a explicar cada una de las partes que componen este prototipo de aplicacióm móvil. En primer lugar se mostrará la página principal de la aplicación donde aparecerá el logo y un botón desplegable con una serie de funciones que serán explicadas más adelante.
+A continuación se expondrán algunas de las partes que componen este prototipo de aplicacióm móvil. En primer lugar se mostrará la página principal de la aplicación donde aparecerá el logo y un botón desplegable con una serie de funciones relacionadas.
 
 <p align="center">
 <img src="https://github.com/DarwinGonzalez/Ionic-GoVLC/blob/master/src/assets/images/landingtab.png?raw=true" width="40%">
