@@ -42,6 +42,7 @@ export class Tab2Page implements OnInit {
     this.initMap();
   }
 
+  // Function that initialize the map
   initMap() {
     const coords = new google.maps.LatLng(39.4767088559305, -0.37814708266530195);
 

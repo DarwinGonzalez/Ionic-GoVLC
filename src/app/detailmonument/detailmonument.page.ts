@@ -19,7 +19,6 @@ import { File } from "@ionic-native/file/ngx";
 export class DetailmonumentPage implements OnInit {
   public monument: Markerinfo;
   public image: string;
-  url = "https://ionicacademy.com";
   constructor(
     private route: ActivatedRoute,
     private callNumber: CallNumber,
@@ -48,7 +47,7 @@ export class DetailmonumentPage implements OnInit {
       .catch(err => console.log("Error launching dialer", err));
   }
 
-  // Functio to change the state if a monument is visited or not
+  // Function to change the state if a monument is visited or not
   changeVisitado(value: boolean) {
     this.monument.setVisitado(!value);
     if (!value === true) {
@@ -58,6 +57,7 @@ export class DetailmonumentPage implements OnInit {
     }
   }
 
+  // Function that takes a picture with the camera of the device
   takePicture() {
     this.Camera.getPicture({
       destinationType: this.Camera.DestinationType.DATA_URL,
@@ -75,6 +75,7 @@ export class DetailmonumentPage implements OnInit {
     );
   }
 
+  // Function that share the image on twitter
   async shareTwitter(image: string) {
     const text = `Fotografía del monumento ${
       this.monument.nombre
@@ -89,6 +90,7 @@ export class DetailmonumentPage implements OnInit {
       });
   }
 
+  // Function that shareImage in Whatsapp App
   async shareWhatsApp(image: string) {
     const text = `Fotografía del monumento ${
       this.monument.nombre

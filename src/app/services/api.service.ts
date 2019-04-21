@@ -214,6 +214,7 @@ export class ApiService {
                     Math.cos(lon2 - lon1)) * R;
   }
 
+  // Funtion that add image take in the monument detail to the vector where this images are saved
   addImageToMonument(image: string, monument: Markerinfo){
     monument.images.push(image);
   }
